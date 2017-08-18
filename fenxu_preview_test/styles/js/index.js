@@ -53,7 +53,7 @@ $(document).ready(function () {
         })
     });
 
-     $('iframe#output').on('iframeChange', function(){resolvePlaceHolders();});
+    $('iframe#output').on('iframeChange', function () { resolvePlaceHolders(); });
 });
 
 function callRender(markupResult) {
@@ -96,7 +96,8 @@ function callRender(markupResult) {
 }
 
 function refreshIframe(content) {
-    var doc = document.getElementById("output").contentWindow.document;
+    var $iframe = $('#output');
+    var doc = $frame[0].documentElement;
     doc.open();
     doc.write(content);
     doc.close();
