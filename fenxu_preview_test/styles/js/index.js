@@ -52,6 +52,8 @@ $(document).ready(function () {
             }
         })
     });
+
+     $('iframe#output').on('iframeChange', function(){resolvePlaceHolders();});
 });
 
 function callRender(markupResult) {
@@ -94,17 +96,17 @@ function callRender(markupResult) {
 }
 
 function refreshIframe(content) {
-    var $iframe = $('#output');
-    $iframe.ready(function () {
-        $iframe.contents().find("html").html(content);
-        resolvePlaceHolders(content);
-    });
+    var doc = document.getElementById("output").contentWindow.document;
+    doc.open();
+    doc.write(content);
+    doc.close();
+    $frame.trigger('iframeChange');
 }
 
 function resolvePlaceHolders() {
     // $('<div>' + globalcontent + '</div>').find('.resolve').each(function () {
     // $('.resolve').each(function () {
-    var frame = $('iframe').contents();
+    var frame = $('#output').contents();
     frame.find('.resolve').each(function () {
         var apiUrl = hostname + "resolve/";
         switch (getResolveType($(this).attr('data-url'))) {
