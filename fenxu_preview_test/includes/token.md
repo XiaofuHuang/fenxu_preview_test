@@ -1,0 +1,1 @@
+It's token content from token.md
