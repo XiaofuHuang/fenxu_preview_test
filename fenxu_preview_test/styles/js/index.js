@@ -97,11 +97,11 @@ function callRender(markupResult) {
 
 function refreshIframe(content) {
     var $iframe = $('#output');
-    var doc = $frame[0].documentElement;
+    var doc = $iframe[0].contentWindow.document;
     doc.open();
     doc.write(content);
     doc.close();
-    $frame.trigger('iframeChange');
+    $iframe.trigger('iframeChange');
 }
 
 function resolvePlaceHolders() {
