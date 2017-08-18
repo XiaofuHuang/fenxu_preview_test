@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>OP Build Preview API Call</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="branch" value="master">
+    <meta name="depot_name" value="MSDN.fenxu_docs_20170301_dynamic">
+    <meta name="repo_url" value="https://github.com/fenxu/fenxu_docs_20170301_dynamic">
+    <meta name="relative_path" value="index.md">
+    <meta name="locale" value="en-us">
+    <script src="styles/js/markdown-it.js"></script>
+    <script src="styles/js/markdown-it-footnote.js"></script>
+    <script src="styles/js/highlight.pack.js"></script>
+    <script src="styles/js/emojify.js"></script>
+    <script src="styles/codemirror/lib/codemirror.js"></script>
+    <script src="styles/codemirror/overlay.js"></script>
+    <script src="styles/codemirror/xml/xml.js"></script>
+    <script src="styles/codemirror/markdown/markdown.js"></script>
+    <script src="styles/codemirror/gfm/gfm.js"></script>
+    <script src="styles/codemirror/javascript/javascript.js"></script>
+    <script src="styles/codemirror/css/css.js"></script>
+    <script src="styles/codemirror/htmlmixed/htmlmixed.js"></script>
+    <script src="styles/codemirror/lib/util/continuelist.js"></script>
+    <script src="styles/js/rawinflate.js"></script>
+    <script src="styles/js/rawdeflate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script type="text/javascript" src="styles/js/index.js"></script>
+    <link rel="stylesheet" href="styles/css/base16-light.css">
+    <link rel="stylesheet" href="styles/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="styles/css/default.css">
+    <link rel="stylesheet" href="styles/css/index.css">
+</head>
+
+<body>
+    <div id="in">
+        <form><textarea id="code">## markdown</textarea></form>
+    </div>
+    <button name="submit" id="submit">Submit</button>
+    <div id="out">
+        <iframe id="output" height="100%" width="100%" style="border:none;">
+        </iframe>
+    </div>
+    <script type="text/javascript">
+        var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+        navigator.saveBlob = navigator.saveBlob || navigator.msSaveBlob || navigator.mozSaveBlob || navigator.webkitSaveBlob;
+        window.saveAs = window.saveAs || window.webkitSaveAs || window.mozSaveAs || window.msSaveAs;
+
+        // Because highlight.js is a bit awkward at times
+        var languageOverrides = {
+            js: 'javascript',
+            html: 'xml'
+        };
+
+        var md = markdownit({
+            html: true,
+            highlight: function (code, lang) {
+                if (languageOverrides[lang]) lang = languageOverrides[lang];
+                if (lang && hljs.getLanguage(lang)) {
+                    try {
+                        return hljs.highlight(lang, code).value;
+                    } catch (e) { }
+                }
+                return '';
+            }
+        })
+        .use(markdownitFootnote);
+
+        var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
+            mode: 'gfm',
+            lineNumbers: false,
+            matchBrackets: true,
+            lineWrapping: true,
+            theme: 'base16-light',
+            extraKeys: { "Enter": "newlineAndIndentContinueMarkdownList" }
+        });
+    </script>
+</body>
+
+</html>
