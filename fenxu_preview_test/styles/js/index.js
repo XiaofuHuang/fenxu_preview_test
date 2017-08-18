@@ -56,7 +56,7 @@ $(document).ready(function () {
     });
 
     
-    $('iframe#yourId').load(function() {
+    $('iframe#output').load(function() {
         resolvePlaceHolders();
     });
 });
