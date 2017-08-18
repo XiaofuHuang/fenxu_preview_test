@@ -103,7 +103,9 @@ function refreshIframe(content) {
 
 function resolvePlaceHolders() {
     // $('<div>' + globalcontent + '</div>').find('.resolve').each(function () {
-    $('.resolve').each(function () {
+    // $('.resolve').each(function () {
+    var frame = $('iframe').contents();
+    frame.find('.resolve').each(function () {
         var apiUrl = hostname + "resolve/";
         switch (getResolveType($(this).attr('data-url'))) {
             case "link":
