@@ -16,9 +16,7 @@ var relativePath = "fenxu_preview_test/sample.md";
 
 var hostname = "https://op-build-perf.azurewebsites.net/";
 var token = "b6748fbf-5735-4bd1-9d61-03dc35d874e8"
-var isOnlinePreview=true;
-
-var globalcontent;
+var isOnlinePreview = true;
 
 var parameter = "?contentGitRepoUrl=https://github.com/fenxuorg/fenxu_preview_test/blob/master/fenxu_preview_test/sample.md"
     + "&depotName=" + depotName
@@ -54,11 +52,6 @@ $(document).ready(function () {
             }
         })
     });
-
-    
-    $('iframe#output').first().load(function() {
-        resolvePlaceHolders();
-    });
 });
 
 function callRender(markupResult) {
@@ -92,7 +85,6 @@ function callRender(markupResult) {
         success: function (msg) {
             console.log('succes: ' + msg);
             refreshIframe(msg);
-            globalcontent = msg;
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
@@ -102,10 +94,11 @@ function callRender(markupResult) {
 }
 
 function refreshIframe(content) {
-    var doc = document.getElementById("output").contentWindow.document;
-    doc.open();
-    doc.write(content);
-    doc.close();
+    var $iframe = $('#output');
+    $iframe.ready(function () {
+        $iframe.contents().find("html").html(content);
+        resolvePlaceHolders(content);
+    });
 }
 
 function resolvePlaceHolders() {
@@ -151,7 +144,7 @@ function resolvePlaceHolders() {
 }
 
 function getResolveType(href) {
-    return href.substr(href.lastIndexOf('/')+1);
+    return href.substr(href.lastIndexOf('/') + 1);
 }
 
 function getResolveResult(apiUrl, callback) {
