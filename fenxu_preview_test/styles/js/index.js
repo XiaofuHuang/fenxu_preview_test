@@ -15,7 +15,7 @@ var gitRepoUrl = "https://github.com/fenxuorg/fenxu_preview_test/";
 var relativePath = "fenxu_preview_test/sample.md";
 
 var hostname = "https://op-build-perf.azurewebsites.net/";
-var token = "b6748fbf-5735-4bd1-9d61-03dc35d874e8"
+var token = "16caaa46-3e1e-4335-80ed-c5ae1c20eca0"
 var isOnlinePreview = true;
 
 var parameter = "?contentGitRepoUrl=https://github.com/fenxuorg/fenxu_preview_test/blob/master/fenxu_preview_test/sample.md"
