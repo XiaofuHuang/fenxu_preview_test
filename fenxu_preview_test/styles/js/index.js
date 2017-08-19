@@ -52,8 +52,6 @@ $(document).ready(function () {
             }
         })
     });
-
-    $('iframe#output').on('iframeChange', function () { resolvePlaceHolders(); });
 });
 
 function callRender(markupResult) {
@@ -96,12 +94,11 @@ function callRender(markupResult) {
 }
 
 function refreshIframe(content) {
-    var $iframe = $('#output');
-    var doc = $iframe[0].contentWindow.document;
-    doc.open();
-    doc.write(content);
-    doc.close();
-    $iframe.trigger('iframeChange');
+    var iframe = document.getElementById('output');
+    iframe.contentWindow.document.open()
+    iframe.contentWindow.document.write(content);​
+
+    resolvePlaceHolders();
 }
 
 function resolvePlaceHolders() {
