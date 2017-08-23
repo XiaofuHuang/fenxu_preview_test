@@ -22,7 +22,7 @@ function resolvePlaceHolders() {
                 apiUrl += "link/";
                 apiUrl += parameter;
                 apiUrl += $(this).attr('data-sourcepath');
-                getResolveResult(apiUrl, function (result, that) {
+                getResolveResult(apiUrl, this, function (result, that) {
                     $(that)[0].href = result;
                 })
                 break;
@@ -30,7 +30,7 @@ function resolvePlaceHolders() {
                 apiUrl += "image/";
                 apiUrl += parameter;
                 apiUrl += $(this).attr('data-sourcepath');
-                getResolveResult(apiUrl, function (result, that) {
+                getResolveResult(apiUrl, this, function (result, that) {
                     $(that)[0].src = result;
                 })
                 break;
@@ -39,7 +39,7 @@ function resolvePlaceHolders() {
                 apiUrl += "token/";
                 apiUrl += parameter;
                 apiUrl += $(this).attr('data-sourcepath');
-                getResolveResult(apiUrl, function (result, that) {
+                getResolveResult(apiUrl, this, function (result, that) {
                     $(that)[0].outerHTML = result;
                 })
                 break;
@@ -47,7 +47,7 @@ function resolvePlaceHolders() {
                 apiUrl += "code/";
                 apiUrl += parameter;
                 apiUrl += $(this).attr('data-sourcepath');
-                getResolveResult(apiUrl, function (result, that) {
+                getResolveResult(apiUrl, this, function (result, that) {
                     $(that)[0].outerHTML = result;
                 })
                 break;
@@ -59,7 +59,7 @@ function getResolveType(href) {
     return href.substr(href.lastIndexOf('/') + 1);
 }
 
-function getResolveResult(apiUrl, callback) {
+function getResolveResult(apiUrl, that, callback) {
     $.ajax({
         url: apiUrl,
         headers: {
@@ -68,7 +68,7 @@ function getResolveResult(apiUrl, callback) {
         },
         success: function (msg) {
             console.log('succes: ' + msg);
-            callback(msg);
+            callback(msg, that);
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
