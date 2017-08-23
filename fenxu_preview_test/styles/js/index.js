@@ -106,16 +106,6 @@ function refreshIframe(content) {
     iframe.contentWindow.document.open()
     iframe.contentWindow.document.write(content);
     iframe.contentWindow.document.close();
-
-    // var iframe = document.createElement('iframe');
-    // iframe.id = 'otuput';
-    // iframe.height = '100%';
-    // iframe.width = '100%';
-    // iframe.style = 'border:none;';
-    // iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(content);
-    // document.getElementById('out').appendChild(iframe);
-
-    // resolvePlaceHolders();
 }
 
 function resolvePlaceHolders() {
