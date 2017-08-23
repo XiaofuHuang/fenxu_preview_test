@@ -1,3 +1,14 @@
+var depotName = "test.fenxu_preview_test";
+
+var hostname = "https://op-build-perf.azurewebsites.net/";
+var token = "dfde23c0-79e6-46bf-8b24-9332096a5d11"
+
+var parameter = "?contentGitRepoUrl=https://github.com/fenxuorg/fenxu_preview_test/blob/master/fenxu_preview_test/sample.md"
+    + "&depotName=" + depotName
+    + "&isInline=false"
+    + "&contentOnlineUrl=https://ppe.docs.microsoft.com/en-us/fenxu_preview_test/sample"
+    + "&dataSourcePath="
+
 $(document).ready(function () {
     resolvePlaceHolders();
 });
