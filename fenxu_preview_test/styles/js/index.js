@@ -98,12 +98,6 @@ function refreshIframe(content) {
     // iframe.contentWindow.document.open()
     // iframe.contentWindow.document.write(content);
 
-    // var $iframe = $('#output');
-    // $iframe.contents().find("html").html(content);
-
-    // var output = $("output")
-    // var $iframe = $('<iframe id="output" height="100%" width="100%" style="border:none;">'+content+'</iframe>');
-
     var iframe = document.createElement('iframe');
     iframe.id = 'otuput';
     iframe.height = '100%';
