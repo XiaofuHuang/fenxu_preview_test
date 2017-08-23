@@ -15,7 +15,7 @@ var gitRepoUrl = "https://github.com/fenxuorg/fenxu_preview_test/";
 var relativePath = "fenxu_preview_test/sample.md";
 
 var hostname = "https://op-build-perf.azurewebsites.net/";
-var token = "16caaa46-3e1e-4335-80ed-c5ae1c20eca0"
+var token = "dfde23c0-79e6-46bf-8b24-9332096a5d11"
 var isOnlinePreview = true;
 
 var parameter = "?contentGitRepoUrl=https://github.com/fenxuorg/fenxu_preview_test/blob/master/fenxu_preview_test/sample.md"
@@ -94,9 +94,24 @@ function callRender(markupResult) {
 }
 
 function refreshIframe(content) {
-    var iframe = document.getElementById('output');
-    iframe.contentWindow.document.open()
-    iframe.contentWindow.document.write(content);
+    // var iframe = document.getElementById('output');
+    // iframe.contentWindow.document.open()
+    // iframe.contentWindow.document.write(content);
+
+    // var $iframe = $('#output');
+    // $iframe.contents().find("html").html(content);
+
+    // var output = $("output")
+    // var $iframe = $('<iframe id="output" height="100%" width="100%" style="border:none;">'+content+'</iframe>');
+
+    var iframe = document.createElement('iframe');
+    iframe.id = 'otuput';
+    iframe.height = '100%';
+    iframe.width = '100%';
+    iframe.style = 'border:none;';
+    iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(content);
+
+    document.getElementById('out').appendChild(iframe);
 
     resolvePlaceHolders();
 }
