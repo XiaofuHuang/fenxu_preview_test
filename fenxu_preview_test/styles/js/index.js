@@ -105,7 +105,7 @@ function refreshIframe(content) {
     var iframe = document.getElementById('output');
     iframe.contentWindow.document.open()
     iframe.contentWindow.document.write(content);
-    iframe.contentWindow.document.close();
+    iframe.contentWindow.document.close(); 
 }
 
 function resolvePlaceHolders() {
