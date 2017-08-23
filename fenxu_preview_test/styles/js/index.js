@@ -94,20 +94,29 @@ function callRender(markupResult) {
 }
 
 function refreshIframe(content) {
-    // var iframe = document.getElementById('output');
-    // iframe.contentWindow.document.open()
-    // iframe.contentWindow.document.write(content);
+    var doc = document.implementation.createHTMLDocument("");
+    doc.documentElement.innerHTML = content;
 
-    var iframe = document.createElement('iframe');
-    iframe.id = 'otuput';
-    iframe.height = '100%';
-    iframe.width = '100%';
-    iframe.style = 'border:none;';
-    iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(content);
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://ppe.docs.microsoft.com/en-us/fenxu_preview_test/styles/js/index.js?branch=jiayin";
+    doc.head.appendChild(script);
 
-    document.getElementById('out').appendChild(iframe);
+    var iframe = document.getElementById('output');
+    iframe.contentWindow.document.open()
+    iframe.contentWindow.document.write(content);
+    iframe.contentWindow.document.close();
 
-    resolvePlaceHolders();
+    // var iframe = document.createElement('iframe');
+    // iframe.id = 'otuput';
+    // iframe.height = '100%';
+    // iframe.width = '100%';
+    // iframe.style = 'border:none;';
+    // iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(content);
+
+    // document.getElementById('out').appendChild(iframe);
+
+    // resolvePlaceHolders();
 }
 
 function resolvePlaceHolders() {
