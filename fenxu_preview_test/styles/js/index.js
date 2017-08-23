@@ -99,12 +99,12 @@ function refreshIframe(content) {
 
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src = "https://ppe.docs.microsoft.com/en-us/fenxu_preview_test/styles/js/index.js?branch=jiayin";
+    script.src = "https://ppe.docs.microsoft.com/en-us/fenxu_preview_test/styles/js/resolve.js?branch=jiayin";
     doc.head.appendChild(script);
 
     var iframe = document.getElementById('output');
     iframe.contentWindow.document.open()
-    iframe.contentWindow.document.write(content);
+    iframe.contentWindow.document.write(doc.documentElement.innerHTML);
     iframe.contentWindow.document.close(); 
 }
 
