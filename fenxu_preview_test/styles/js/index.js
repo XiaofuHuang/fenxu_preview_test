@@ -113,7 +113,6 @@ function refreshIframe(content) {
     // iframe.width = '100%';
     // iframe.style = 'border:none;';
     // iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(content);
-
     // document.getElementById('out').appendChild(iframe);
 
     // resolvePlaceHolders();
