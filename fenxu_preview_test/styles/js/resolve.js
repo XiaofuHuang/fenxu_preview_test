@@ -16,21 +16,22 @@ $(document).ready(function () {
 function resolvePlaceHolders() {
     $('.resolve').each(function () {
         var apiUrl = hostname + "resolve/";
+        var that = this;
         switch (getResolveType($(this).attr('data-url'))) {
             case "link":
                 apiUrl += "link/";
                 apiUrl += parameter;
                 apiUrl += $(this).attr('data-sourcepath');
-                getResolveResult(apiUrl, function (result, this) {
-                    $(this)[0].href = result;
+                getResolveResult(apiUrl, function (result, that) {
+                    $(that)[0].href = result;
                 })
                 break;
             case "image":
                 apiUrl += "image/";
                 apiUrl += parameter;
                 apiUrl += $(this).attr('data-sourcepath');
-                getResolveResult(apiUrl, function (result, this) {
-                    $(this)[0].src = result;
+                getResolveResult(apiUrl, function (result, that) {
+                    $(that)[0].src = result;
                 })
                 break;
             case "include_inline":
@@ -38,16 +39,16 @@ function resolvePlaceHolders() {
                 apiUrl += "token/";
                 apiUrl += parameter;
                 apiUrl += $(this).attr('data-sourcepath');
-                getResolveResult(apiUrl, function (result, this) {
-                    $(this)[0].outerHTML = result;
+                getResolveResult(apiUrl, function (result, that) {
+                    $(that)[0].outerHTML = result;
                 })
                 break;
             case "fences":
                 apiUrl += "code/";
                 apiUrl += parameter;
                 apiUrl += $(this).attr('data-sourcepath');
-                getResolveResult(apiUrl, function (result, this) {
-                    $(this)[0].outerHTML = result;
+                getResolveResult(apiUrl, function (result, that) {
+                    $(that)[0].outerHTML = result;
                 })
                 break;
         }
