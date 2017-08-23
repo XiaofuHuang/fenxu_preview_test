@@ -16,7 +16,6 @@ $(document).ready(function () {
 function resolvePlaceHolders() {
     $('.resolve').each(function () {
         var apiUrl = hostname + "resolve/";
-        var that = this;
         switch (getResolveType($(this).attr('data-url'))) {
             case "link":
                 apiUrl += "link/";

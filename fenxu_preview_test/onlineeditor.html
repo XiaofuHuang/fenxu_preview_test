@@ -40,14 +40,13 @@
     <button name="submit" id="submit">Submit</button>
     <div id="out">
          <iframe id="output" height="100%" width="100%" style="border:none;">
-        </iframe> 
+        </iframe>
     </div>
     <script type="text/javascript">
         var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
         navigator.saveBlob = navigator.saveBlob || navigator.msSaveBlob || navigator.mozSaveBlob || navigator.webkitSaveBlob;
         window.saveAs = window.saveAs || window.webkitSaveAs || window.mozSaveAs || window.msSaveAs;
 
-        // Because highlight.js is a bit awkward at times
         var languageOverrides = {
             js: 'javascript',
             html: 'xml'
