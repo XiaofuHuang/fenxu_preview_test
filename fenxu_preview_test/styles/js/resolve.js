@@ -21,7 +21,7 @@ function resolvePlaceHolders() {
                 apiUrl += "link/";
                 apiUrl += parameter;
                 apiUrl += $(this).attr('data-sourcepath');
-                getResolveResult(apiUrl, function (result) {
+                getResolveResult(apiUrl, function (result, this) {
                     $(this)[0].href = result;
                 })
                 break;
@@ -29,7 +29,7 @@ function resolvePlaceHolders() {
                 apiUrl += "image/";
                 apiUrl += parameter;
                 apiUrl += $(this).attr('data-sourcepath');
-                getResolveResult(apiUrl, function (result) {
+                getResolveResult(apiUrl, function (result, this) {
                     $(this)[0].src = result;
                 })
                 break;
@@ -38,7 +38,7 @@ function resolvePlaceHolders() {
                 apiUrl += "token/";
                 apiUrl += parameter;
                 apiUrl += $(this).attr('data-sourcepath');
-                getResolveResult(apiUrl, function (result) {
+                getResolveResult(apiUrl, function (result, this) {
                     $(this)[0].outerHTML = result;
                 })
                 break;
@@ -46,7 +46,7 @@ function resolvePlaceHolders() {
                 apiUrl += "code/";
                 apiUrl += parameter;
                 apiUrl += $(this).attr('data-sourcepath');
-                getResolveResult(apiUrl, function (result) {
+                getResolveResult(apiUrl, function (result, this) {
                     $(this)[0].outerHTML = result;
                 })
                 break;
