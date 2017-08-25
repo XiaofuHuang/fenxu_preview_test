@@ -1,15 +1,4 @@
-// var isOnlinePreview = true;
-
-// var hostname;
-// var token;
-// if (isOnlinePreview) {
-//     hostname = "https://op-build-sandbox2.azurewebsites.net/";
-//     token = "e8962712-dd2e-4b47-9bb7-9c380f22282d"
-// } else {
-//     hostname = "https://localhost/openpublishing/api/";
-//     token = "85896a10-abae-49b4-9c45-77850c2e2e69"
-// }
-
+// TODO: hard code reolve
 var depotName = "test.fenxu_preview_test";
 var gitRepoUrl = "https://github.com/fenxuorg/fenxu_preview_test/";
 var relativePath = "fenxu_preview_test/sample.md";
@@ -99,7 +88,7 @@ function refreshIframe(content) {
 
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src = "https://ppe.docs.microsoft.com/en-us/fenxu_preview_test/styles/js/resolve.js?branch=jiayin";
+    script.src = "./styles/js/resolve.js";
     doc.head.appendChild(script);
 
     var iframe = document.getElementById('output');

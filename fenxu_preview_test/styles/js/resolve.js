@@ -3,6 +3,9 @@ var depotName = "test.fenxu_preview_test";
 var hostname = "https://op-build-perf.azurewebsites.net/";
 var token = "4d0e8306-5023-46e1-8364-2cc1a2a96cc1"
 
+var shouldReloadJs = false;
+var isWaiting = false;
+
 var parameter = "?contentGitRepoUrl=https://github.com/fenxuorg/fenxu_preview_test/blob/master/fenxu_preview_test/sample.md"
     + "&depotName=" + depotName
     + "&isInline=false"
@@ -12,6 +15,28 @@ var parameter = "?contentGitRepoUrl=https://github.com/fenxuorg/fenxu_preview_te
 $(document).ready(function () {
     resolvePlaceHolders();
 });
+
+function reloadJs() {
+    if (shouldReloadJs) {
+        if (!isWaiting) {
+            isWaiting = true;
+            setTimeout(() => {
+                isWaiting = false;
+
+            }, 300)
+        }
+    }
+}
+
+function reloadJsCore() {
+    // TODO: Hard code resolve
+    var script_arr = [
+        '/_themes/docs.theme/master/en-us/_themes/global/js/global.min.js',
+        '/_themes/docs.theme/master/en-us/_themes/javascript/b55c2ce2849231e14ff4.conceptual.js'
+    ];
+
+    $.getScript(script_arr);
+}
 
 function resolvePlaceHolders() {
     $('.resolve').each(function () {
@@ -23,6 +48,7 @@ function resolvePlaceHolders() {
                 apiUrl += $(this).attr('data-sourcepath');
                 getResolveResult(apiUrl, this, function (result, that) {
                     $(that)[0].href = result;
+                    reloadJs();
                 })
                 break;
             case "image":
@@ -31,6 +57,7 @@ function resolvePlaceHolders() {
                 apiUrl += $(this).attr('data-sourcepath');
                 getResolveResult(apiUrl, this, function (result, that) {
                     $(that)[0].src = result;
+                    reloadJs();
                 })
                 break;
             case "include_inline":
@@ -40,6 +67,7 @@ function resolvePlaceHolders() {
                 apiUrl += $(this).attr('data-sourcepath');
                 getResolveResult(apiUrl, this, function (result, that) {
                     $(that)[0].outerHTML = result;
+                    reloadJs();
                 })
                 break;
             case "fences":
@@ -48,6 +76,7 @@ function resolvePlaceHolders() {
                 apiUrl += $(this).attr('data-sourcepath');
                 getResolveResult(apiUrl, this, function (result, that) {
                     $(that)[0].outerHTML = result;
+                    reloadJs();
                 })
                 break;
         }
