@@ -7,7 +7,7 @@ var parameter = "?contentGitRepoUrl=https://github.com/fenxuorg/fenxu_preview_te
     + "&depotName=" + depotName
     + "&isInline=false"
     + "&contentOnlineUrl=https://ppe.docs.microsoft.com/en-us/fenxu_preview_test/sample"
-    + "&dataSourcePath="
+    + "&dataSourcePath=";
 
 $(document).ready(function () {
     resolvePlaceHolders();
