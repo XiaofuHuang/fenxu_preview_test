@@ -1,7 +1,7 @@
 var depotName = "test.fenxu_preview_test";
 
 var hostname = "https://op-build-perf.azurewebsites.net/";
-var token = "5b86e990-d4eb-43c8-8d62-45834367b9c5"
+var token = "4d0e8306-5023-46e1-8364-2cc1a2a96cc1"
 
 var parameter = "?contentGitRepoUrl=https://github.com/fenxuorg/fenxu_preview_test/blob/master/fenxu_preview_test/sample.md"
     + "&depotName=" + depotName
