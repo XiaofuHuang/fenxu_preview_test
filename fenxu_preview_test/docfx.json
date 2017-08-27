@@ -8,11 +8,27 @@
         "exclude": [
           "**/obj/**",
           "**/includes/**",
+		  "**/file_map/**",
           "README.md",
           "LICENSE",
           "LICENSE-CODE",
           "ThirdPartyNotices"
         ]
+      },
+	  {
+        "files": [
+          "**/*.md"
+        ],
+        "exclude": [
+          "**/obj/**",
+          "**/includes/**",
+          "README.md",
+          "LICENSE",
+          "LICENSE-CODE",
+          "ThirdPartyNotices"
+        ],
+		"src": "file_map",
+		"dest": "complex"
       }
     ],
     "resource": [
