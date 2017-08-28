@@ -1,7 +1,7 @@
 var depotName = "test.fenxu_preview_test";
 
 var hostname = "https://op-build-perf.azurewebsites.net/";
-var token = "4d0e8306-5023-46e1-8364-2cc1a2a96cc1"
+var token = "4c823882-4c6c-4e01-934b-8310c1c71a82"
 
 var shouldReloadJs = false;
 var isWaiting = false;
