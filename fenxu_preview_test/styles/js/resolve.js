@@ -22,20 +22,16 @@ function reloadJs() {
             isWaiting = true;
             setTimeout(() => {
                 isWaiting = false;
-
+                reloadJsCore();
             }, 300)
         }
     }
 }
 
 function reloadJsCore() {
-    // TODO: Hard code resolve
-    var script_arr = [
-        '/_themes/docs.theme/master/en-us/_themes/global/js/global.min.js',
-        '/_themes/docs.theme/master/en-us/_themes/javascript/b55c2ce2849231e14ff4.conceptual.js'
-    ];
+    var conceptual_script = $("script[src$='.conceptual.js']")[0].src;
 
-    $.getScript(script_arr);
+    $.getScript(conceptual_script);
 }
 
 function resolvePlaceHolders() {
