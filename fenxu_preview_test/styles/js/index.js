@@ -2,7 +2,6 @@
 var depotName = "test.fenxu_preview_test";
 var gitRepoUrl = "https://github.com/fenxuorg/fenxu_preview_test/";
 var relativePath = "fenxu_preview_test/sample.md";
-
 var hostname = "https://op-build-perf.azurewebsites.net/";
 var token = "66ba5227-08e7-4bb6-9341-473520932347"
 var isOnlinePreview = true;
