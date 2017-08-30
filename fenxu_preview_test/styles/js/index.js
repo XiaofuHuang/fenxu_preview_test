@@ -5,6 +5,7 @@ var relativePath = "fenxu_preview_test/sample.md";
 var hostname = "https://op-build-perf.azurewebsites.net/";
 var token = "66ba5227-08e7-4bb6-9341-473520932347"
 var isOnlinePreview = true;
+var branch = "jiayin";
 
 var parameter = "?contentGitRepoUrl=https://github.com/fenxuorg/fenxu_preview_test/blob/master/fenxu_preview_test/sample.md"
     + "&depotName=" + depotName
@@ -17,7 +18,7 @@ $(document).ready(function () {
         var markupRequest = {
             "markdown_content": document.getElementById("in").innerText.replace(/\u200B/g, ''),
             "repository_url": "https://github.com",
-            "branch": "master",
+            "branch": branch,
             "relative_path": "index.md",
             "depot_name": "test"
         };
@@ -56,7 +57,7 @@ function callRender(markupResult) {
         "html_content": JSON.stringify(rawJson),
         "is_online_preview": isOnlinePreview,
         "repository_url": gitRepoUrl,
-        "branch": "master",
+        "branch": branch,
         "relative_path": relativePath,
         "depot_name": depotName,
         "locale": "en-us"
