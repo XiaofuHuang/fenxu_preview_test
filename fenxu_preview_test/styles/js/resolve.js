@@ -36,13 +36,13 @@ function reloadJsCore() {
 function resolvePlaceHolders() {
     $('.resolve').each(function () {
         var apiUrl = hostname + "resolve/";
+        $(this)[0].classList.remove("resolve");
         switch (getResolveType($(this).attr('data-url'))) {
             case "link":
                 apiUrl += "link/";
                 apiUrl += parameter;
                 apiUrl += encodeURIComponent($(this).attr('data-sourcepath'));
                 getResolveResult(apiUrl, this, function (result, that) {
-                    $(that)[0].classList.remove("resolve");
                     $(that)[0].href = result;
                     reloadJs();
                 })
@@ -52,7 +52,6 @@ function resolvePlaceHolders() {
                 apiUrl += parameter;
                 apiUrl += encodeURIComponent($(this).attr('data-sourcepath'));
                 getResolveResult(apiUrl, this, function (result, that) {
-                    $(that)[0].classList.remove("resolve");
                     $(that)[0].src = result;
                     reloadJs();
                 })

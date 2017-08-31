@@ -10,7 +10,7 @@ var branch = "master";
 $(document).ready(function () {
     $("button").click(function () {
         var markupRequest = {
-            "markdown_content": document.getElementById("in").innerText.replace(/\u200B/g, ''),
+            "markdown_content": document.getElementById("in").innerText.substr(1).replace(/\u200B/g, ''),
             "repository_url": gitRepoUrl,
             "branch": branch,
             "relative_path": relativePath,
