@@ -3,7 +3,6 @@ var contentGitRepoUrl = "https://github.com/fenxuorg/fenxu_preview_test_ppe/blob
 var hostname = "https://op-build-sandbox2.azurewebsites.net/";
 var token = "3411b408-756f-4485-9a7f-fd5c03edc166";
 
-var shouldReloadJs = false;
 var isWaiting = false;
 
 var parameter = "?contentGitRepoUrl=" + encodeURIComponent(contentGitRepoUrl)
@@ -16,14 +15,12 @@ $(document).ready(function () {
 });
 
 function reloadJs() {
-    if (shouldReloadJs) {
-        if (!isWaiting) {
-            isWaiting = true;
-            setTimeout(() => {
-                isWaiting = false;
-                reloadJsCore();
-            }, 300)
-        }
+    if (!isWaiting) {
+        isWaiting = true;
+        setTimeout(() => {
+            isWaiting = false;
+            reloadJsCore();
+        }, 300)
     }
 }
 
@@ -82,7 +79,7 @@ function resolvePlaceHolders() {
                 apiUrl += "code/";
                 apiUrl += parameter;
                 apiUrl += encodeURIComponent($(this).attr('data-sourcepath'));
-                if($(this).attr('querystringandfragment') != undefined){
+                if ($(this).attr('querystringandfragment') != undefined) {
                     apiUrl += encodeURIComponent($(this).attr('querystringandfragment'));
                 }
                 // TODO: append information: lang, name, title
