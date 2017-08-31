@@ -1,26 +1,20 @@
 // TODO: hard code reolve
-var depotName = "test.fenxu_preview_test";
-var gitRepoUrl = "https://github.com/fenxuorg/fenxu_preview_test/";
-var relativePath = "fenxu_preview_test/sample.md";
-var hostname = "https://op-build-perf.azurewebsites.net/";
+var depotName = "MSDN.fenxu_preview_test_ppe";
+var gitRepoUrl = "https://github.com/fenxuorg/fenxu_preview_test_ppe/";
+var relativePath = "fenxu_preview_test_ppe/sample.md";
+var hostname = "https://op-build-sandbox2.azurewebsites.net/";
 var token = "3a7b682a-1040-4228-98e9-4dbce74938a5"
 var isOnlinePreview = true;
-var branch = "jiayin"; 
-
-var parameter = "?contentGitRepoUrl=https://github.com/fenxuorg/fenxu_preview_test/blob/master/fenxu_preview_test/sample.md"
-    + "&depotName=" + depotName
-    + "&isInline=false"
-    + "&contentOnlineUrl=https://ppe.docs.microsoft.com/en-us/fenxu_preview_test/sample"
-    + "&dataSourcePath="
+var branch = "master";
 
 $(document).ready(function () {
     $("button").click(function () {
         var markupRequest = {
             "markdown_content": document.getElementById("in").innerText.replace(/\u200B/g, ''),
-            "repository_url": "https://github.com",
+            "repository_url": gitRepoUrl,
             "branch": branch,
-            "relative_path": "index.md",
-            "depot_name": "test"
+            "relative_path": relativePath,
+            "depot_name": depotName
         };
 
         $.ajax({
@@ -48,7 +42,7 @@ function callRender(markupResult) {
         "content": markupResult,
         "rawMetadata": {
             "layout": "Conceptual",
-            "fileRelativePath": "index.html",
+            "fileRelativePath": relativePath,
         },
         "themesRelativePathToOutputRoot": "_themes/"
     }
