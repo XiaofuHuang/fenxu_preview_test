@@ -1,5 +1,5 @@
 var depotName = "MSDN.fenxu_preview_test_ppe";
-var contentGitRepoUrl = "https://github.com/fenxuorg/fenxu_preview_test_ppe/blob/master/fenxu_preview_test_ppe/sample.md";
+var contentGitRepoUrl = "https://github.com/fenxuorg/fenxu_preview_test_ppe/blob/master/fenxu_preview_test_ppe/file_map/sample_with_crr_file_map.md";
 var hostname = "https://op-build-sandbox2.azurewebsites.net/";
 var token = "3411b408-756f-4485-9a7f-fd5c03edc166";
 
