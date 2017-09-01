@@ -3,7 +3,7 @@ var depotName = "MSDN.fenxu_preview_test_ppe";
 var gitRepoUrl = "https://github.com/fenxuorg/fenxu_preview_test_ppe/";
 var relativePath = "fenxu_preview_test_ppe/file_map/sample_with_crr_file_map.md";
 var hostname = "https://op-build-sandbox2.azurewebsites.net/";
-var token = "3411b408-756f-4485-9a7f-fd5c03edc166"
+var token = "0a12eed3-1732-436b-9906-9fda958c3c79"
 var isOnlinePreview = true;
 var branch = "master";
 
