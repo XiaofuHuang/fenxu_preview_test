@@ -1,6 +1,6 @@
-var regex = /[?&]([^=#]+)=([^&#]*)/g,
-var url = window.location.href,
-var params = {},
+var regex = /[?&]([^=#]+)=([^&#]*)/g;
+var url = window.location.href;
+var params = {};
 var match;
 while (match = regex.exec(url)) {
     params[match[1]] = match[2];
