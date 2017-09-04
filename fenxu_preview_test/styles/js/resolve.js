@@ -37,6 +37,7 @@ function resolvePlaceHolders() {
         $(this)[0].classList.remove("resolve");
         switch (getResolveType($(this).attr('data-url'))) {
             case "link":
+                // TODO: do not automaticly resolve but on click
                 apiUrl += "link/";
                 apiUrl += parameter;
                 apiUrl += encodeURIComponent($(this).attr('data-sourcepath'));
