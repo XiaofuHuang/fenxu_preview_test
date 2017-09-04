@@ -10,6 +10,7 @@ var depotName = params.depotname ? decodeURIComponent(params.depotname) : alert(
 var originalContentGitUrl = params.originalcontentgiturl ? decodeURIComponent(params.originalcontentgiturl) : alert("Please append original content git url in url!");
 var contentOnlineUrl = params.contentonlineurl ? decodeURIComponent(params.contentonlineurl) : alert("Please append content online url in url!");
 
+// TODO: support vso resource
 var gitRepoUrlRegex = /^((https|http):\/\/(.+@)?github\.com\/|git@github\.com:)(\S+)\/([A-Za-z0-9_.-]+)(\.git)?\/blob\/(\S+?)\/(\S+)$/g;
 var match = gitRepoUrlRegex.exec(originalContentGitUrl);
 if (match == null) {
@@ -19,43 +20,57 @@ var gitRepoUrl = match[1] + match[4] + '/' + match[5] + '/';
 var relativePath = match[8];
 var branch = match[7];
 var hostname = "https://op-build-sandbox2.azurewebsites.net/";
-var token = "6fc85e40-41d0-4069-b999-83e2b3caa0a0"
+var token = "6fc85e40-41d0-4069-b999-83e2b3caa0a0";
 var isOnlinePreview = true;
-// TODO: hard code reolve
-// var depotName = "MSDN.fenxu_preview_test_ppe";
-// var gitRepoUrl = "https://github.com/fenxuorg/fenxu_preview_test_ppe/";
-// var relativePath = "fenxu_preview_test_ppe/file_map/sample_with_crr_file_map.md";
-// var branch = "master";
 
 $(document).ready(function () {
-    $("button").click(function () {
-        var markupRequest = {
-            "markdown_content": document.getElementById("in").innerText.substr(1).replace(/\u200B/g, ''),
-            "repository_url": gitRepoUrl,
-            "branch": branch,
-            "relative_path": relativePath,
-            "depot_name": depotName
-        };
-
-        $.ajax({
-            type: "POST",
-            url: hostname + "markup",
-            headers: {
-                "Content-Type": "application/json",
-                "X-OP-BuildUserToken": token
-            },
-            data: JSON.stringify(markupRequest),
-            success: function (msg) {
-                console.log('succes: ' + msg);
-                callRender(msg);
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert(xhr.status);
-                alert(thrownError);
-            }
-        })
+    $.ajax({
+        url: hostname + 'content/',
+        headers: {
+            "Content-Type": "application/json",
+            "X-OP-BuildUserToken": token
+        },
+        success: function (msg) {
+            console.log('success: ' + msg);
+            editor.doc.setValue(msg);
+            sendPreviewRequest();
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            alert(thrownError);
+        }
     });
+
+    $("button").click(sendPreviewRequest);
 });
+
+function sendPreviewRequest() {
+    var markupRequest = {
+        "markdown_content": document.getElementById("in").innerText.substr(1).replace(/\u200B/g, ''),
+        "repository_url": gitRepoUrl,
+        "branch": branch,
+        "relative_path": relativePath,
+        "depot_name": depotName
+    };
+
+    $.ajax({
+        type: "POST",
+        url: hostname + "markup",
+        headers: {
+            "Content-Type": "application/json",
+            "X-OP-BuildUserToken": token
+        },
+        data: JSON.stringify(markupRequest),
+        success: function (msg) {
+            console.log('success: ' + msg);
+            callRender(msg);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            alert(thrownError);
+        }
+    })
+}
 
 function callRender(markupResult) {
     var rawJson = {
@@ -86,7 +101,7 @@ function callRender(markupResult) {
         },
         data: JSON.stringify(renderRequest),
         success: function (msg) {
-            console.log('succes: ' + msg);
+            console.log('success: ' + msg);
             refreshIframe(msg);
         },
         error: function (xhr, ajaxOptions, thrownError) {
