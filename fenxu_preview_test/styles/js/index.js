@@ -1,11 +1,31 @@
-// TODO: hard code reolve
-var depotName = "MSDN.fenxu_preview_test_ppe";
-var gitRepoUrl = "https://github.com/fenxuorg/fenxu_preview_test_ppe/";
-var relativePath = "fenxu_preview_test_ppe/file_map/sample_with_crr_file_map.md";
+var regex = /[?&]([^=#]+)=([^&#]*)/g,
+var url = window.location.href,
+var params = {},
+var match;
+while (match = regex.exec(url)) {
+    params[match[1]] = match[2];
+}
+
+var depotName = params.depotname ? decodeURIComponent(params.depotname) : alert("Please append depot name in url!");
+var originalContentGitUrl = params.originalcontentgiturl ? decodeURIComponent(params.originalcontentgiturl) : alert("Please append original content git url in url!");
+var contentOnlineUrl = params.contentonlineurl ? decodeURIComponent(params.contentonlineurl) : alert("Please append content online url in url!");
+
+var gitRepoUrlRegex = /^((https|http):\/\/(.+@)?github\.com\/|git@github\.com:)(\S+)\/([A-Za-z0-9_.-]+)(\.git)?\/blob\/(\S+?)\/(\S+)$/g;
+var match = gitRepoUrlRegex.exec(originalContentGitUrl);
+if (match == null) {
+    alert("[Parameters Error]: original content git url is not correct!");
+}
+var gitRepoUrl = match[1] + match[4] + '/' + match[5] + '/';
+var relativePath = match[8];
+var branch = match[7];
 var hostname = "https://op-build-sandbox2.azurewebsites.net/";
-var token = "0a12eed3-1732-436b-9906-9fda958c3c79"
+var token = "6fc85e40-41d0-4069-b999-83e2b3caa0a0"
 var isOnlinePreview = true;
-var branch = "master";
+// TODO: hard code reolve
+// var depotName = "MSDN.fenxu_preview_test_ppe";
+// var gitRepoUrl = "https://github.com/fenxuorg/fenxu_preview_test_ppe/";
+// var relativePath = "fenxu_preview_test_ppe/file_map/sample_with_crr_file_map.md";
+// var branch = "master";
 
 $(document).ready(function () {
     $("button").click(function () {
@@ -88,5 +108,5 @@ function refreshIframe(content) {
     var iframe = document.getElementById('output');
     iframe.contentWindow.document.open()
     iframe.contentWindow.document.write(doc.documentElement.innerHTML);
-    iframe.contentWindow.document.close(); 
+    iframe.contentWindow.document.close();
 }

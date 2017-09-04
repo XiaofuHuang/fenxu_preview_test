@@ -1,13 +1,14 @@
-var depotName = "MSDN.fenxu_preview_test_ppe";
-var contentGitRepoUrl = "https://github.com/fenxuorg/fenxu_preview_test_ppe/blob/master/fenxu_preview_test_ppe/file_map/sample_with_crr_file_map.md";
-var hostname = "https://op-build-sandbox2.azurewebsites.net/";
-var token = "0a12eed3-1732-436b-9906-9fda958c3c79";
+var depotName = parent.depotName;
+var contentGitRepoUrl = parent.originalContentGitUrl;
+var hostname = parent.hostname;
+var contentOnlineUrl = parent.contentOnlineUrl;
+var token = parent.token;
 
 var isWaiting = false;
 
 var parameter = "?contentGitRepoUrl=" + encodeURIComponent(contentGitRepoUrl)
     + "&depotName=" + encodeURIComponent(depotName)
-    + "&contentOnlineUrl=" + encodeURIComponent("https://ppe.docs.microsoft.com/en-us/fenxu_preview_test/sample")
+    + "&contentOnlineUrl=" + encodeURIComponent(contentOnlineUrl)
     + "&dataSourcePath=";
 
 $(document).ready(function () {
