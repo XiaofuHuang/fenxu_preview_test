@@ -8,6 +8,7 @@ while (match = regex.exec(url)) {
 
 var depotName = params.depotname ? decodeURIComponent(params.depotname) : alert("Please append depot name in url!");
 var originalContentGitUrl = params.originalcontentgiturl ? decodeURIComponent(params.originalcontentgiturl) : alert("Please append original content git url in url!");
+var contgentGitUrl = params.contentgiturl ? decodeURIComponent(params.contentgiturl) : alert("Please append content git url in url!");
 var contentOnlineUrl = params.contentonlineurl ? decodeURIComponent(params.contentonlineurl) : alert("Please append content online url in url!");
 
 // TODO: support vso resource
@@ -20,7 +21,7 @@ var gitRepoUrl = match[1] + match[4] + '/' + match[5] + '/';
 var relativePath = match[8];
 var branch = match[7];
 var hostname = "https://op-build-sandbox2.azurewebsites.net/";
-var token = "6fc85e40-41d0-4069-b999-83e2b3caa0a0";
+var token = "85b4d056-7bd5-4835-b8d6-507574898b9a";
 var isOnlinePreview = true;
 
 $(document).ready(function () {
