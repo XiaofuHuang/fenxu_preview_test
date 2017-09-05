@@ -8,7 +8,7 @@ while (match = regex.exec(url)) {
 
 var depotName = params.depotname ? decodeURIComponent(params.depotname) : alert("Please append depot name in url!");
 var originalContentGitUrl = params.originalcontentgiturl ? decodeURIComponent(params.originalcontentgiturl) : alert("Please append original content git url in url!");
-var contgentGitUrl = params.contentgiturl ? decodeURIComponent(params.contentgiturl) : alert("Please append content git url in url!");
+// var contgentGitUrl = params.contentgiturl ? decodeURIComponent(params.contentgiturl) : alert("Please append content git url in url!");
 var contentOnlineUrl = params.contentonlineurl ? decodeURIComponent(params.contentonlineurl) : alert("Please append content online url in url!");
 
 // TODO: support vso resource
