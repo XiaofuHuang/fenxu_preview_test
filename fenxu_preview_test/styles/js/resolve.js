@@ -8,7 +8,7 @@ var isWaiting = false;
 
 var parameter = "?contentGitRepoUrl=" + encodeURIComponent(contentGitRepoUrl)
     + "&depotName=" + encodeURIComponent(depotName)
-    + "&contentOnlineUrl=" + encodeURIComponent(contentOnlineUrl)
+    // + "&contentOnlineUrl=" + encodeURIComponent(contentOnlineUrl)
     + "&dataSourcePath=";
 
 $(document).ready(function () {
@@ -44,7 +44,7 @@ function resolvePlaceHolders() {
                 getResolveResult(apiUrl, this, function (result, that) {
                     $(that)[0].href = result;
                     reloadJs();
-                })
+                }, linkOrImageErrorhandler(xhr))
                 break;
             case "image":
                 apiUrl += "image/";
@@ -53,7 +53,7 @@ function resolvePlaceHolders() {
                 getResolveResult(apiUrl, this, function (result, that) {
                     $(that)[0].src = result;
                     reloadJs();
-                })
+                }, linkOrImageErrorhandler(xhr))
                 break;
             case "include_inline":
                 apiUrl += "token/";
@@ -61,10 +61,9 @@ function resolvePlaceHolders() {
                 apiUrl += encodeURIComponent($(this).attr('data-sourcepath'));
                 apiUrl += "&isInline=true"
                 getResolveResult(apiUrl, this, function (result, that) {
-                    $(that)[0].outerHTML = result;
-                    reloadJs();
+                    replaceHtml(result, that);
                     // TODO: call resolve function after reloadJs()
-                })
+                }, tokenOrCodeErrorHandler(xhr))
                 break;
             case "include_block":
                 apiUrl += "token/";
@@ -72,10 +71,9 @@ function resolvePlaceHolders() {
                 apiUrl += encodeURIComponent($(this).attr('data-sourcepath'));
                 apiUrl += "&isInline=false"
                 getResolveResult(apiUrl, this, function (result, that) {
-                    $(that)[0].outerHTML = result;
-                    reloadJs();
+                    replaceHtml(result, that);
                     // TODO: call resolve function after reloadJs()
-                })
+                }, tokenOrCodeErrorHandler(xhr))
                 break;
             case "fences":
                 apiUrl += "code/";
@@ -86,9 +84,8 @@ function resolvePlaceHolders() {
                 }
                 // TODO: append information: lang, name, title
                 getResolveResult(apiUrl, this, function (result, that) {
-                    $(that)[0].outerHTML = result;
-                    reloadJs();
-                })
+                    replaceHtml(result, that);
+                }, tokenOrCodeErrorHandler(xhr))
                 break;
         }
     });
@@ -98,7 +95,28 @@ function getResolveType(href) {
     return href.substr(href.lastIndexOf('/') + 1);
 }
 
-function getResolveResult(apiUrl, that, callback) {
+function replaceHtml(result, that){
+    $(that)[0].outerHTML = result;
+    reloadJs();
+}
+
+function tokenOrCodeErrorHandler(xhr){
+    if(xhr.status === 500 && xhr.responseJSON.error === "InternalServerError.GitNotFound"){
+        alert("code or token not found!");
+    }else{
+        alert(xhr.status + xhr.statusText);
+    }
+}
+
+function linkOrImageErrorhandler(xhr){
+    if(xhr.status === 404 && xhr.responseJSON.error === "ResolveLinkFromFileMapFailed"){
+        alert("link or image not exist!");
+    }else{
+        alert(xhr.status + xhr.statusText);
+    }
+}
+
+function getResolveResult(apiUrl, that, successCallback, errorCallback) {
     $.ajax({
         url: apiUrl,
         headers: {
@@ -106,12 +124,11 @@ function getResolveResult(apiUrl, that, callback) {
             "X-OP-BuildUserToken": token
         },
         success: function (msg) {
-            console.log('succes: ' + msg);
-            callback(msg, that);
+            // console.log('succes: ' + msg);
+            successCallback(msg, that);
         },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status);
-            alert(thrownError);
+        error: function (xhr) {
+            errorCallback(xhr);
         }
     })
 }
