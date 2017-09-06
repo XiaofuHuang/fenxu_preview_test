@@ -44,7 +44,7 @@ function resolvePlaceHolders() {
                 getResolveResult(apiUrl, this, function (result, that) {
                     $(that)[0].href = result;
                     reloadJs();
-                }, linkOrImageErrorhandler(xhr))
+                }, linkOrImageErrorhandler)
                 break;
             case "image":
                 apiUrl += "image/";
@@ -53,7 +53,7 @@ function resolvePlaceHolders() {
                 getResolveResult(apiUrl, this, function (result, that) {
                     $(that)[0].src = result;
                     reloadJs();
-                }, linkOrImageErrorhandler(xhr))
+                }, linkOrImageErrorhandler)
                 break;
             case "include_inline":
                 apiUrl += "token/";
@@ -63,7 +63,7 @@ function resolvePlaceHolders() {
                 getResolveResult(apiUrl, this, function (result, that) {
                     replaceHtml(result, that);
                     // TODO: call resolve function after reloadJs()
-                }, tokenOrCodeErrorHandler(xhr))
+                }, tokenOrCodeErrorHandler)
                 break;
             case "include_block":
                 apiUrl += "token/";
@@ -73,7 +73,7 @@ function resolvePlaceHolders() {
                 getResolveResult(apiUrl, this, function (result, that) {
                     replaceHtml(result, that);
                     // TODO: call resolve function after reloadJs()
-                }, tokenOrCodeErrorHandler(xhr))
+                }, tokenOrCodeErrorHandler)
                 break;
             case "fences":
                 apiUrl += "code/";
@@ -85,7 +85,7 @@ function resolvePlaceHolders() {
                 // TODO: append information: lang, name, title
                 getResolveResult(apiUrl, this, function (result, that) {
                     replaceHtml(result, that);
-                }, tokenOrCodeErrorHandler(xhr))
+                }, tokenOrCodeErrorHandler)
                 break;
         }
     });
