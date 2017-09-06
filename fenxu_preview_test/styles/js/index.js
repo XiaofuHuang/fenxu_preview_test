@@ -8,7 +8,7 @@ while (match = regex.exec(url)) {
 
 var depotName = params.depotname ? decodeURIComponent(params.depotname) : alert("Please append depot name in url!");
 var originalContentGitUrl = params.originalcontentgiturl ? decodeURIComponent(params.originalcontentgiturl) : alert("Please append original content git url in url!");
-// var contgentGitUrl = params.contentgiturl ? decodeURIComponent(params.contentgiturl) : alert("Please append content git url in url!");
+var contgentGitUrl = params.contentgiturl ? decodeURIComponent(params.contentgiturl) : alert("Please append content git url in url!");
 var contentOnlineUrl = params.contentonlineurl ? decodeURIComponent(params.contentonlineurl) : alert("Please append content online url in url!");
 
 // TODO: support vso resource
@@ -21,7 +21,7 @@ var gitRepoUrl = match[1] + match[4] + '/' + match[5] + '/';
 var relativePath = match[8];
 var branch = match[7];
 var hostname = "https://op-build-sandbox2.azurewebsites.net/";
-var token = "d2dcad83-8e08-43bd-92fe-c6f388fcb2a8";
+var token = "68271f67-4b4c-4c1a-b734-622516aa7193";
 var isOnlinePreview = true;
 
 $(document).ready(function () {
@@ -42,7 +42,9 @@ $(document).ready(function () {
         }
     });
 
-    $("button").click(sendPreviewRequest);
+    $("#preview").click(sendPreviewRequest);
+
+    $("#submit").click(sendSubmitRequest);
 });
 
 function sendPreviewRequest() {
@@ -65,6 +67,31 @@ function sendPreviewRequest() {
         success: function (msg) {
             console.log('success: ' + msg);
             callRender(msg);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            alert(thrownError);
+        }
+    })
+}
+
+function sendSubmitRequest(){
+    var submitRequest = {
+        "content_git_repo_url": contgentGitUrl,
+        "content": document.getElementById("in").innerText.substr(1).replace(/\u200B/g, ''),
+        "submit_type": "PullRequest"
+    };
+
+    $.ajax({
+        type: "PUT",
+        url: hostname + "submit",
+        headers: {
+            "Content-Type": "application/json",
+            "X-OP-BuildUserToken": token
+        },
+        data: JSON.stringify(submitRequest),
+        success: function (msg) {
+            console.log('success: ' + msg);
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
