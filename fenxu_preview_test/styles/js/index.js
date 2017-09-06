@@ -149,7 +149,13 @@ function refreshIframe(content) {
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.src = "./styles/js/resolve.js";
+
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "./styles/css/resolve.css";
+
     doc.head.appendChild(script);
+    doc.head.appendChild(link);
 
     var iframe = document.getElementById('output');
     iframe.contentWindow.document.open()
