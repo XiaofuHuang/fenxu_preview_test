@@ -76,10 +76,13 @@ function sendPreviewRequest() {
 }
 
 function sendSubmitRequest(){
+    var pullRequestTitle = prompt("Enter title of this Pull Request : ", "pull request title here");
+
     var submitRequest = {
         "content_git_repo_url": contgentGitUrl,
         "content": document.getElementById("in").innerText.substr(1).replace(/\u200B/g, ''),
-        "submit_type": "PullRequest"
+        "submit_type": "PullRequest",
+        "pull_request_title": pullRequestTitle
     };
 
     $.ajax({

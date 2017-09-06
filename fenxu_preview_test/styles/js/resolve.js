@@ -44,7 +44,14 @@ function resolvePlaceHolders() {
                 getResolveResult(apiUrl, this, function (result, that) {
                     $(that)[0].href = result;
                     reloadJs();
-                }, linkOrImageErrorhandler)
+                }, function(xhr, that){
+                    if(xhr.status === 404 && xhr.responseJSON.error === "ResolveLinkFromFileMapFailed"){
+                        $(that)[0].title = "Validation Error: link file " + $(that).attr('data-sourcepath') + " not exist";
+                        $(that).addClass("resolve-error-not-exist");
+                    }else{
+                        alert(xhr.status + xhr.statusText);
+                    }
+                })
                 break;
             case "image":
                 apiUrl += "image/";
@@ -53,7 +60,14 @@ function resolvePlaceHolders() {
                 getResolveResult(apiUrl, this, function (result, that) {
                     $(that)[0].src = result;
                     reloadJs();
-                }, linkOrImageErrorhandler)
+                }, function(xhr, that){
+                    if(xhr.status === 404 && xhr.responseJSON.error === "ResolveLinkFromFileMapFailed"){
+                        $(that)[0].title = "Validation Error: image " + $(that).attr('data-sourcepath') + " not exist";
+                        $(that)[0].src = "/ops-build/image/not-exist.png";
+                    }else{
+                        alert(xhr.status + xhr.statusText);
+                    }
+                })
                 break;
             case "include_inline":
                 apiUrl += "token/";
@@ -100,7 +114,7 @@ function replaceHtml(result, that){
     reloadJs();
 }
 
-function tokenOrCodeErrorHandler(xhr){
+function tokenOrCodeErrorHandler(xhr, that){
     if(xhr.status === 500 && xhr.responseJSON.error === "InternalServerError.GitNotFound"){
         alert("code or token not found!");
     }else{
@@ -128,7 +142,7 @@ function getResolveResult(apiUrl, that, successCallback, errorCallback) {
             successCallback(msg, that);
         },
         error: function (xhr) {
-            errorCallback(xhr);
+            errorCallback(xhr, that);
         }
     })
 }
