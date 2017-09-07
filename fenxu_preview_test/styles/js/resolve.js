@@ -1,7 +1,6 @@
 var depotName = parent.depotName;
 var contentGitRepoUrl = parent.originalContentGitUrl;
 var hostname = parent.hostname;
-var contentOnlineUrl = parent.contentOnlineUrl;
 var token = parent.token;
 
 var isWaiting = false;
