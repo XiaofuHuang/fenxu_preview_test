@@ -62,7 +62,7 @@ function resolvePlaceHolders() {
                 }, function(xhr, that){
                     if(xhr.status === 404 && xhr.responseJSON.error === "ResolveLinkFromFileMapFailed"){
                         $(that)[0].title = "Validation Error: image " + $(that).attr('data-sourcepath') + " not exist";
-                        $(that)[0].src = "/ops-build/image/not-exist.png";
+                        $(that)[0].src = "/ops-build/image/image_not_found.png";
                     }else{
                         alert(xhr.status + xhr.statusText);
                     }
@@ -76,7 +76,13 @@ function resolvePlaceHolders() {
                 getResolveResult(apiUrl, this, function (result, that) {
                     replaceHtml(result, that);
                     // TODO: call resolve function after reloadJs()
-                }, tokenOrCodeErrorHandler)
+                }, function(xhr, that){
+                    if(xhr.status === 500 && xhr.responseJSON.error === "InternalServerError.GitNotFound"){
+                        $(that)[0].src = "/ops-build/image/file_inclusion_not_found.png";
+                    }else{
+                        alert(xhr.status + xhr.statusText);
+                    }
+                })
                 break;
             case "include_block":
                 apiUrl += "token/";
@@ -86,7 +92,13 @@ function resolvePlaceHolders() {
                 getResolveResult(apiUrl, this, function (result, that) {
                     replaceHtml(result, that);
                     // TODO: call resolve function after reloadJs()
-                }, tokenOrCodeErrorHandler)
+                },  function(xhr, that){
+                    if(xhr.status === 500 && xhr.responseJSON.error === "InternalServerError.GitNotFound"){
+                        $(that)[0].src = "/ops-build/image/file_inclusion_not_found.png";
+                    }else{
+                        alert(xhr.status + xhr.statusText);
+                    }
+                })
                 break;
             case "fences":
                 apiUrl += "code/";
@@ -98,7 +110,13 @@ function resolvePlaceHolders() {
                 // TODO: append information: lang, name, title
                 getResolveResult(apiUrl, this, function (result, that) {
                     replaceHtml(result, that);
-                }, tokenOrCodeErrorHandler)
+                },  function(xhr, that){
+                    if(xhr.status === 500 && xhr.responseJSON.error === "InternalServerError.GitNotFound"){
+                        $(that)[0].src = "/ops-build/image/code_fences_not_found.png";
+                    }else{
+                        alert(xhr.status + xhr.statusText);
+                    }
+                })
                 break;
         }
     });
@@ -111,14 +129,6 @@ function getResolveType(href) {
 function replaceHtml(result, that){
     $(that)[0].outerHTML = result;
     reloadJs();
-}
-
-function tokenOrCodeErrorHandler(xhr, that){
-    if(xhr.status === 500 && xhr.responseJSON.error === "InternalServerError.GitNotFound"){
-        alert("code or token not found!");
-    }else{
-        alert(xhr.status + xhr.statusText);
-    }
 }
 
 function linkOrImageErrorhandler(xhr){
