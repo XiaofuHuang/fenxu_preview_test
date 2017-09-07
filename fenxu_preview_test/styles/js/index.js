@@ -148,11 +148,11 @@ function refreshIframe(content) {
 
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src = "./styles/js/resolve.js";
+    script.src = "./styles/js/resolve.js?branch=SaveAndPR";
 
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "./styles/css/resolve.css";
+    link.href = "./styles/css/resolve.css?branch=SaveAndPR";
 
     doc.head.appendChild(script);
     doc.head.appendChild(link);
