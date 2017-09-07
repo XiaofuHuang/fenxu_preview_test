@@ -64,17 +64,16 @@ function sendPreviewRequest() {
         },
         data: JSON.stringify(markupRequest),
         success: function (msg) {
-            console.log('success: ' + msg);
+            // console.log('success: ' + msg);
             callRender(msg);
         },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status);
-            alert(thrownError);
+        error: function (xhr) {
+            alert(xhr.status + xhr.statusText);
         }
     })
 }
 
-function sendSubmitRequest(){
+function sendSubmitRequest() {
     var pullRequestTitle = prompt("Enter title of this Pull Request : ", "pull request title here");
 
     var submitRequest = {
@@ -93,11 +92,12 @@ function sendSubmitRequest(){
         },
         data: JSON.stringify(submitRequest),
         success: function (msg) {
-            console.log('success: ' + msg);
+            if (window.confirm("Your change has been submited, pull request url: " + msg.url) == true) {
+                window.location.replace(msg.url);
+            }
         },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status);
-            alert(thrownError);
+        error: function (xhr) {
+            alert(xhr.status + xhr.statusText);
         }
     })
 }
