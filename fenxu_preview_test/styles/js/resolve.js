@@ -62,7 +62,7 @@ function resolvePlaceHolders() {
                 }, function(xhr, that){
                     if(xhr.status === 404 && xhr.responseJSON.error === "ResolveLinkFromFileMapFailed"){
                         $(that)[0].title = "Validation Error: image " + $(that).attr('data-sourcepath') + " not exist";
-                        $(that)[0].src = "/ops-build/image/image_not_found.png";
+                        $(that)[0].src = "/ops-build/image/image_not_found.png?branch=SaveAndPR";
                     }else{
                         alert(xhr.status + xhr.statusText);
                     }
@@ -78,7 +78,7 @@ function resolvePlaceHolders() {
                     // TODO: call resolve function after reloadJs()
                 }, function(xhr, that){
                     if(xhr.status === 500 && xhr.responseJSON.error === "InternalServerError.GitNotFound"){
-                        $(that)[0].src = "/ops-build/image/file_inclusion_not_found.png";
+                        $(that)[0].src = "/ops-build/image/file_inclusion_not_found.png?branch=SaveAndPR";
                     }else{
                         alert(xhr.status + xhr.statusText);
                     }
@@ -94,7 +94,7 @@ function resolvePlaceHolders() {
                     // TODO: call resolve function after reloadJs()
                 },  function(xhr, that){
                     if(xhr.status === 500 && xhr.responseJSON.error === "InternalServerError.GitNotFound"){
-                        $(that)[0].src = "/ops-build/image/file_inclusion_not_found.png";
+                        $(that)[0].src = "/ops-build/image/file_inclusion_not_found.png?branch=SaveAndPR";
                     }else{
                         alert(xhr.status + xhr.statusText);
                     }
@@ -112,7 +112,7 @@ function resolvePlaceHolders() {
                     replaceHtml(result, that);
                 },  function(xhr, that){
                     if(xhr.status === 500 && xhr.responseJSON.error === "InternalServerError.GitNotFound"){
-                        $(that)[0].src = "/ops-build/image/code_fences_not_found.png";
+                        $(that)[0].src = "/ops-build/image/code_fences_not_found.png?branch=SaveAndPR";
                     }else{
                         alert(xhr.status + xhr.statusText);
                     }
