@@ -20,7 +20,7 @@ var gitRepoUrl = match[1] + match[4] + '/' + match[5] + '/';
 var relativePath = match[8];
 var branch = match[7];
 var hostname = "https://op-build-sandbox2.azurewebsites.net/";
-var token = "419cf841-707e-46e3-a1e8-2af807f88684";
+var token = "a3c7a0eb-6464-45b1-a096-8afb0c10142d";
 var isOnlinePreview = true;
 
 $(document).ready(function () {
@@ -35,9 +35,8 @@ $(document).ready(function () {
             editor.doc.setValue(msg);
             sendPreviewRequest();
         },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status);
-            alert(thrownError);
+        error: function (xhr) {
+            alert(xhr.status + xhr.statusText);
         }
     });
 
@@ -131,7 +130,7 @@ function callRender(markupResult) {
         },
         data: JSON.stringify(renderRequest),
         success: function (msg) {
-            console.log('success: ' + msg);
+            // console.log('success: ' + msg);
             refreshIframe(msg);
         },
         error: function (xhr, ajaxOptions, thrownError) {
