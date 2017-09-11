@@ -47,7 +47,7 @@ $(document).ready(function () {
 
 function sendPreviewRequest() {
     var markupRequest = {
-        "markdown_content": document.getElementById("in").innerText.substr(1).replace(/\u200B/g, ''),
+        "markdown_content": editor.doc.getValue().replace(/\u200B/g, ''),
         "repository_url": gitRepoUrl,
         "branch": branch,
         "relative_path": relativePath,
@@ -77,7 +77,7 @@ function sendSubmitRequest() {
 
     var submitRequest = {
         "content_git_repo_url": contgentGitUrl,
-        "content": document.getElementById("in").innerText.substr(1).replace(/\u200B/g, ''),
+        "content": editor.doc.getValue().replace(/\u200B/g, ''),
         "submit_type": "PullRequest",
         "pull_request_title": pullRequestTitle
     };
