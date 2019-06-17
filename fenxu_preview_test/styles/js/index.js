@@ -25,7 +25,7 @@ var isOnlinePreview = true;
 
 $(document).ready(function () {
     $.ajax({
-        url: hostname + 'content/?contentGitRepoUrl=' + originalContentGitUrl,
+        url: hostname + 'preview/content/?contentGitRepoUrl=' + originalContentGitUrl,
         headers: {
             "Content-Type": "application/json",
             "X-OP-BuildUserToken": token
