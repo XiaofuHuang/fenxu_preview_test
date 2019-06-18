@@ -56,7 +56,7 @@ function sendPreviewRequest() {
 
     $.ajax({
         type: "POST",
-        url: hostname + "markup",
+        url: hostname + "preview/markup",
         headers: {
             "Content-Type": "application/json",
             "X-OP-BuildUserToken": token
@@ -84,7 +84,7 @@ function sendSubmitRequest() {
 
     $.ajax({
         type: "PUT",
-        url: hostname + "submit",
+        url: hostname + "preview/submit",
         headers: {
             "Content-Type": "application/json",
             "X-OP-BuildUserToken": token
@@ -123,7 +123,7 @@ function callRender(markupResult) {
 
     $.ajax({
         type: "POST",
-        url: hostname + "render",
+        url: hostname + "preview/render",
         headers: {
             "Content-Type": "application/json",
             "X-OP-BuildUserToken": token
