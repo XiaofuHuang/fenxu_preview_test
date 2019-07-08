@@ -20,7 +20,7 @@ var gitRepoUrl = match[1] + match[4] + '/' + match[5] + '/';
 var relativePath = match[8];
 var branch = match[7];
 var hostname = "https://op-build-sandbox2.azurewebsites.net/";
-var token = "3ab5ef74-b0fa-4ae9-98c9-12a8c02b7f85";
+var token = "c8838701-db2c-4c93-a190-c2d44a77f896";
 var isOnlinePreview = true;
 
 $(document).ready(function () {
