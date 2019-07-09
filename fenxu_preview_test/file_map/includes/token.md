@@ -1,1 +1,0 @@
-It's token content from token.md within file_map_folder folder
