@@ -2,8 +2,10 @@
   "build_entry_point": "op",
   "docsets_to_publish": [],
   "notification_subscribers": [],
+  "sync_notification_subscribers": [],
   "branches_to_filter": [],
   "skip_source_output_uploading": false,
+  "contribution_branch_mappings": {},
   "dependent_repositories": [
     {
       "path_to_root": "_themes",
@@ -12,6 +14,7 @@
       "branch_mapping": {}
     }
   ],
+  "branch_target_mapping": {},
   "need_generate_pdf_url_template": false,
   "need_generate_pdf": false,
   "need_generate_intellisense": false
